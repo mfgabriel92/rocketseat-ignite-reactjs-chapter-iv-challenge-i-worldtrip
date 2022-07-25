@@ -1,7 +1,6 @@
 import { Box, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 import { City } from "../components/pages/Continent/City";
 import { Info } from "../components/pages/Continent/Info";
 
@@ -66,13 +65,6 @@ function Continent({ continent }: ContinentProps) {
     </>
   );
 }
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   return {
-//     paths: [],
-//     fallback: "blocking",
-//   };
-// };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   try {
