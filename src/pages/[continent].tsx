@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import { City } from "../components/pages/Continent/City";
 import { Info } from "../components/pages/Continent/Info";
 
@@ -66,18 +67,16 @@ function Continent({ continent }: ContinentProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [],
+//     fallback: "blocking",
+//   };
+// };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   try {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/continents/${params?.continent}`,
-    );
+    const { data } = await axios.get(`${req.headers.referer}/api/continents/${params?.continent}`);
 
     return {
       props: {
