@@ -75,7 +75,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const { data } = await axios.get(`/api/continents/${params?.continent}`);
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/continents/${params?.continent}`,
+    );
 
     return {
       props: {
